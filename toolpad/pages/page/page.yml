@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: page
+spec:
+  id: about
+  title: page
+  display: shell
+  queries:
+    - name: query
+      query:
+        kind: rest
+        url: https://hub.dummyapis.com/employee
+        headers: []
+        method: GET
+    - name: getBooks
+      query:
+        kind: rest
+        url: http://localhost:3030/books
+        headers: []
+        method: GET
+  content:
+    - component: PageRow
+      name: pageRow
+      children:
+        - component: DataGrid
+          name: dataGrid
+          props:
+            rows:
+              $$jsExpression: |
+                query.data
+            columns:
+              - field: id
+                type: number
+              - field: imageUrl
+                type: link
+              - field: firstName
+                type: string
+              - field: lastName
+                type: string
+              - field: email
+                type: string
+              - field: contactNumber
+                type: string
+              - field: age
+                type: number
+              - field: dob
+                type: string
+              - field: salary
+                type: number
+              - field: address
+                type: string
+    - component: PageRow
+      name: pageRow1
+      children:
+        - component: DataGrid
+          name: dataGrid1
+          props:
+            rows:
+              $$jsExpression: |
+                getBooks.data
+            columns:
+              - field: author
+                type: string
+              - field: country
+                type: string
+              - field: imageLink
+                type: link
+              - field: link
+                type: link
+              - field: pages
+                type: number
+              - field: title
+                type: string
+              - field: year
+                type: number
+              - field: id
+                type: number

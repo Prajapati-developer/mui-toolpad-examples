@@ -1,0 +1,721 @@
+apiVersion: v1
+kind: page
+spec:
+  id: 7bGf8iM
+  title: page1
+  content:
+    - component: PageRow
+      name: pageRow1
+      children:
+        - component: PageColumn
+          name: pageColumn6
+          layout:
+            columnSize: 1
+          children:
+            - component: PageRow
+              name: pageRow6
+              props:
+                justifyContent: start
+              children:
+                - component: Image
+                  name: image
+                  layout:
+                    columnSize: 0.3222120613194096
+                    horizontalAlign: center
+                  props:
+                    src:
+                      $$jsExpression: >
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Stacked_books_icon.svg/2089px-Stacked_books_icon.svg.png"
+                    fit: fill
+                    width: 100
+                    height: 100
+                - component: Text
+                  name: pageHeader
+                  layout:
+                    columnSize: 1.6777879386805903
+                  props:
+                    mode: markdown
+                    variant: h5
+                    value: "<h4 style=\"text-align:center;font-size:20px;line-height:1.5\">\"Books
+                      are like fingerprints, always new and one-of-a-kind. As
+                      publishers, it's our job to bring those prints to life and
+                      make them easy to access for the entire world.\"\r
+
+                      </h4>"
+    - component: PageRow
+      name: pageRow
+      children:
+        - component: Tabs
+          name: tabs
+          layout:
+            horizontalAlign: center
+          props:
+            tabs:
+              - title: Books
+                name: books
+              - title: Add Book
+                name: add-book
+              - title: Search Books
+                name: search-book
+            defaultValue: books
+    - component: PageRow
+      name: pageRow13
+      children:
+        - component: Button
+          name: Searchbtn
+          props:
+            content: Go and Search
+            onClick:
+              $$navigationAction:
+                page: fN4Tw_n
+                parameters: {}
+          layout:
+            horizontalAlign: end
+    - component: PageRow
+      name: pageRow7
+      children:
+        - component: Container
+          name: container1
+          props:
+            sx:
+              $$jsExpression: >
+                tabs.value == "add-book" ? { display: "block" } : { display:
+                "none" }
+          children:
+            - component: PageRow
+              name: pageRow8
+              children:
+                - component: PageColumn
+                  name: pageColumn3
+                  layout:
+                    columnSize: 1
+                  children:
+                    - component: Text
+                      name: pageTitle
+                      layout:
+                        horizontalAlign: center
+                      props:
+                        variant: h4
+                        value:
+                          $$jsExpression: |
+                            bookId.value ? "Edit Your Book" : " Add Your Book "
+                        mode: text
+                        sx:
+                          textAlign: center
+                          color: "#D63D5E"
+                          marginBottom: 10px
+                          marginTop: 10px
+                    - component: Button
+                      name: addBookBtn
+                      layout:
+                        horizontalAlign: end
+                      props:
+                        onClick:
+                          $$jsExpressionAction: "pageTitle.value=\"Add your Book\"\r
+
+                            \ 
+                            bookId.defaultValue=\"\""
+                        content: Add NewBook
+                        size: medium
+                        variant: text
+                        sx:
+                          $$jsExpression: >
+                            bookId.value ? { display: "block" } : { display:
+                            "none" }
+                    - component: Container
+                      name: container
+                      children:
+                        - component: PageRow
+                          name: pageRow3
+                          children:
+                            - component: PageColumn
+                              name: pageColumn5
+                              layout:
+                                columnSize: 1
+                              children:
+                                - component: Form
+                                  name: form
+                                  layout:
+                                    columnSize: 1
+                                  props:
+                                    formControlsAlign: end
+                                    onSubmit:
+                                      $$jsExpressionAction: "await bookId.value? editBookById.fetch()
+                                        :  addBook.fetch();\r
+
+                                        \
+                                        editBookById.data?
+                                        tabs.value=\"books\":error.value=\"Some\
+                                        thing went wrong\""
+                                    submitButtonText:
+                                      $$jsExpression: |
+                                        bookId.value ? "Edit" : " Add "
+                                    sx:
+                                      padding: 0px 10px
+                                  children:
+                                    - component: PageRow
+                                      name: pageRow4
+                                      children:
+                                        - component: PageColumn
+                                          name: pageColumn1
+                                          layout:
+                                            columnSize: 1
+                                          children:
+                                            - component: PageRow
+                                              name: pageRow5
+                                              props:
+                                                justifyContent: start
+                                              children:
+                                                - component: PageColumn
+                                                  name: pageColumn
+                                                  layout:
+                                                    columnSize: 1
+                                                  children:
+                                                    - component: TextField
+                                                      name: authorField
+                                                      props:
+                                                        label: Author Name
+                                                        isRequired: true
+                                                        isInvalid:
+                                                          $$jsExpression: >
+                                                            // authorField.value
+
+                                                            new RegExp(/[^a-zA-Z0-9 ]/g).test(authorField.value)
+                                                        fullWidth: true
+                                                        minLength: 3
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.author
+                                                            : ""
+                                                    - component: TextField
+                                                      name: bookCoverImg
+                                                      props:
+                                                        label: Book Cover Img Link
+                                                        fullWidth: true
+                                                        isRequired: true
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.link
+                                                            : ""
+                                                    - component: TextField
+                                                      name: ebookLink
+                                                      props:
+                                                        label: E-Book Link
+                                                        minLength: -4
+                                                        fullWidth: true
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.link
+                                                            : ""
+                                                        isRequired: true
+                                                    - component: TextField
+                                                      name: title
+                                                      props:
+                                                        isRequired: true
+                                                        isInvalid:
+                                                          $$jsExpression: >
+                                                            // authorField.value
+
+                                                            new RegExp(/[^a-zA-Z0-9 ]/g).test(title.value)
+                                                        minLength: 5
+                                                        fullWidth: true
+                                                        label: Title
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.title
+                                                            : ""
+                                                - component: PageColumn
+                                                  name: pageColumn2
+                                                  layout:
+                                                    columnSize: 1
+                                                  children:
+                                                    - component: Select
+                                                      name: country
+                                                      layout:
+                                                        horizontalAlign: center
+                                                      props:
+                                                        isRequired: true
+                                                        fullWidth: true
+                                                        label: Country
+                                                        options:
+                                                          - Australia
+                                                          - Austria
+                                                          - Bahrain
+                                                          - Belgium
+                                                          - UK
+                                                          - India
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.country
+                                                            : ""
+                                                    - component: Select
+                                                      name: language
+                                                      props:
+                                                        options:
+                                                          - Hindi
+                                                          - English
+                                                          - Gujarati
+                                                        label: Language
+                                                        fullWidth: true
+                                                        isRequired: true
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.language
+                                                            : ""
+                                                    - component: TextField
+                                                      name: numberOfPage
+                                                      props:
+                                                        label: page
+                                                        isRequired: true
+                                                        minLength: 3
+                                                        isInvalid:
+                                                          $$jsExpression: >
+                                                            // authorField.value
+
+                                                            new RegExp(/[^0-9]/g).test(page.value)
+                                                        fullWidth: true
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            dataGrid.selection.pages
+                                                            : ""
+                                                    - component: DatePicker
+                                                      name: year
+                                                      props:
+                                                        isRequired: true
+                                                        name: Year
+                                                        fullWidth: true
+                                                        format:
+                                                          $$jsExpression: |
+                                                            "YYYY"
+                                                        defaultValue:
+                                                          $$jsExpression: >
+                                                            pageTitle.value.includes("Edit")
+                                                            ?
+                                                            `${dataGrid.selection.year}-01-01`
+                                                            : ""
+                                - component: TextField
+                                  name: bookId
+                                  props:
+                                    sx:
+                                      display: none
+    - component: PageRow
+      name: pageRow9
+      children:
+        - component: Container
+          name: container2
+          props:
+            sx:
+              $$jsExpression: >
+                tabs.value == "books" ? { display: "block" } : { display: "none"
+                }
+          children:
+            - component: PageRow
+              name: pageRow10
+              children:
+                - component: PageColumn
+                  name: pageColumn4
+                  layout:
+                    columnSize: 1
+                  children:
+                    - component: Container
+                      name: booksContainer
+                      props:
+                        sx:
+                          $$jsExpression: >
+                            tabs.value == "books"
+                              ? { display: "block", padding: "10px", border: "0px" }
+                              : { display: "none" }
+                      children:
+                        - component: PageRow
+                          name: pageRow2
+                          children:
+                            - component: PageColumn
+                              name: pageColumn7
+                              layout:
+                                columnSize: 1
+                              children:
+                                - component: PageRow
+                                  name: pageRow12
+                                  props:
+                                    justifyContent: start
+                                  children:
+                                    - component: PageColumn
+                                      name: pageColumn8
+                                      layout:
+                                        columnSize: 1
+                                      children:
+                                        - component: Button
+                                          name: button1
+                                          props:
+                                            variant: outlined
+                                            content:
+                                              $$jsExpression: >
+                                                // `Edit ${dataGrid.selection ?
+                                                dataGrid.selection?.title : ""}
+                                                Book`;
+
+                                                "Edit Book"
+                                            onClick:
+                                              $$jsExpressionAction: "\r
+
+                                                \
+                                                // setTimeout(()=>{\r
+
+                                                \
+                                                \  tabs.value=\"add-book\";\r
+
+                                                \
+                                                \  bookId.defaultValue=dataGrid\
+                                                .selection.id\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //    authorField.value,
+                                                form.value.authorField,
+                                                ebookLink.value,form.value.eboo\
+                                                kLink=\"\"\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //   authorField.value=dataGrid\
+                                                ?.selection?.author||\"\";\r
+
+                                                \
+                                                //   form.value.authorField=dat\
+                                                aGrid?.selection?.author||\"\";\
+                                                \r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //   bookCoverImg.defaultValue=\
+                                                dataGrid?.selection?.imageLink||\
+                                                \"\";\r
+
+                                                \
+                                                //   form.value.bookCoverImg=
+                                                bookCoverImg.value;\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //   ebookLink.value=dataGrid?.\
+                                                selection?.link ||\"\";\r
+
+                                                \
+                                                //   form.value.ebookLink=dataG\
+                                                rid?.selection?.link||\"\";\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //
+                                                title.value=dataGrid?.selection\
+                                                ?.title ||\"\";\r
+
+                                                \
+                                                //
+                                                form.value.title=dataGrid?.sele\
+                                                ction?.title||\"\";\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                //
+                                                numberOfPage.value=dataGrid?.se\
+                                                lection?.pages.toString() ||
+                                                \"\";\r
+
+                                                \
+                                                //
+                                                form.value.numberOfPage=dataGri\
+                                                d?.selection?.pages.toString()||\
+                                                \"\";\r
+
+                                                \
+                                                \r
+
+                                                \
+                                                \r
+
+                                                \
+                                                \r
+
+                                                \
+                                                \r\n"
+                                            disabled:
+                                              $$jsExpression: >
+                                                dataGrid?.selection?.id ? false
+                                                : true
+                                            color: secondary
+                                            size: medium
+                                            sx:
+                                              textTransform: capitalize
+                                    - component: Button
+                                      name: deleteButton
+                                      layout:
+                                        horizontalAlign: start
+                                      props:
+                                        content:
+                                          $$jsExpression: >
+                                            `Delete ${dataGrid.selection ?
+                                            dataGrid.selection?.title : ""}
+                                            Book`
+                                        onClick:
+                                          $$jsExpressionAction: await deleteBookById.fetch()
+                                        disabled:
+                                          $$jsExpression: >
+                                            dataGrid?.selection?.id ? false :
+                                            true
+                                        size: medium
+                                        color: secondary
+                                        variant: outlined
+                                    - component: Button
+                                      name: addBookBtn2
+                                      layout:
+                                        horizontalAlign: center
+                                      props:
+                                        onClick:
+                                          $$jsExpressionAction: "tabs.value=\"add-book\";\r
+
+                                            \
+                                            bookId.defaultValue=\"\";"
+                                        content: Add Book
+                                        size: medium
+                                        variant: outlined
+                                        color: secondary
+                                    - component: Button
+                                      name: Refresh
+                                      layout:
+                                        horizontalAlign: end
+                                      props:
+                                        variant: outlined
+                                        content: Refresh
+                                        size: medium
+                                        onClick:
+                                          $$jsExpressionAction: bookList.refetch()
+                                - component: Text
+                                  name: text
+                                  layout:
+                                    horizontalAlign: start
+                                  props:
+                                    value: Book Published
+                                    variant: h6
+                                - component: DataGrid
+                                  name: dataGrid
+                                  props:
+                                    rows:
+                                      $$jsExpression: |
+                                        bookList.data
+                                    columns:
+                                      - field: title
+                                        type: string
+                                        headerName: Title
+                                        width: 145
+                                      - field: author
+                                        type: string
+                                        headerName: Author
+                                      - field: country
+                                        type: string
+                                        headerName: Country
+                                      - field: imageLink
+                                        type: image
+                                        headerName: Book Cover
+                                        width: 143
+                                        align: left
+                                      - field: link
+                                        type: link
+                                        headerName: Link
+                                        width: 117
+                                      - field: language
+                                        type: string
+                                        headerName: Language
+                                      - field: pages
+                                        type: number
+                                        headerName: Pages
+                                        width: 115
+                                      - field: year
+                                        type: string
+                                        width: 135
+                                        headerName: Year
+                                    sx:
+                                      $$jsExpression: >
+                                        tabs.value == "books" ? { display:
+                                        "block" } : { display: "none" }
+                                    density: standard
+                                    height: 426
+  queries:
+    - name: bookList
+      query:
+        kind: rest
+        url: http://localhost:3030/books
+        searchParams: []
+        headers: []
+        method: GET
+    - name: addBook
+      mode: mutation
+      query:
+        kind: rest
+        url: http://localhost:3030/books
+        searchParams: []
+        headers: []
+        body:
+          kind: raw
+          content:
+            $$jsExpression: |
+              JSON.stringify({
+                author: parameters.author,
+                country: parameters.country,
+                imageLink: parameters.imageLink,
+                language: parameters.language,
+                link: parameters.link,
+                pages: parameters.pages,
+                title: parameters.title,
+                year: parameters.year,
+                id: Math.round(Math.random()),
+              })
+          contentType: application/json
+        method: POST
+      parameters:
+        - name: author
+          value:
+            $$jsExpression: |
+              authorField.value
+        - name: country
+          value:
+            $$jsExpression: |
+              country.value
+        - name: imageLink
+          value:
+            $$jsExpression: |
+              bookCoverImg.value
+        - name: language
+          value:
+            $$jsExpression: |
+              language.value
+        - name: pages
+          value:
+            $$jsExpression: |
+              numberOfPage.value
+        - name: year
+          value:
+            $$jsExpression: |
+              new Date(year.value).getFullYear()
+        - name: link
+          value:
+            $$jsExpression: |
+              ebookLink.value
+        - name: title
+          value:
+            $$jsExpression: |
+              title.value
+    - name: deleteBookById
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: |
+            `http://localhost:3030/books/${parameters.id}`
+        searchParams: []
+        headers: []
+        method: DELETE
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: |
+              dataGrid?.selection?.id
+    - name: editBookById
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: |
+            `http://localhost:3030/books/${parameters.id}`
+        searchParams: []
+        headers: []
+        body:
+          kind: raw
+          content:
+            $$jsExpression: |
+              JSON.stringify({
+                author: parameters.author,
+                country: parameters.country,
+                imageLink: parameters.imageLink,
+                language: parameters.language,
+                link: parameters.link,
+                pages: parameters.pages,
+                title: parameters.title,
+                year: parameters.year,
+                id: parameters.bookId,
+              })
+          contentType: application/json
+        method: PUT
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: |
+              dataGrid?.selection?.id
+        - name: author
+          value:
+            $$jsExpression: |
+              authorField.value
+        - name: country
+          value:
+            $$jsExpression: |
+              country.value
+        - name: langauge
+          value:
+            $$jsExpression: |
+              language.value
+        - name: bookId
+          value:
+            $$jsExpression: |
+              bookId.value
+        - name: title
+          value:
+            $$jsExpression: |
+              title.value
+        - name: bookLink
+          value: null
+        - name: imageLink
+          value:
+            $$jsExpression: |
+              bookCoverImg.value
+        - name: pages
+          value:
+            $$jsExpression: |
+              numberOfPage.value
+        - name: link
+          value:
+            $$jsExpression: |
+              ebookLink.value
+        - name: year
+          value:
+            $$jsExpression: |
+              new Date(year.value).getFullYear()
+  display: shell
