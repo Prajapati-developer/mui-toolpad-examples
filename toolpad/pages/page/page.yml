@@ -11,12 +11,14 @@ spec:
         url: https://hub.dummyapis.com/employee
         headers: []
         method: GET
+        searchParams: []
     - name: getBooks
       query:
         kind: rest
         url: https://fake-json-server-4yn5.onrender.com/books
         headers: []
         method: GET
+        searchParams: []
   content:
     - component: PageRow
       name: pageRow

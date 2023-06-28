@@ -149,10 +149,13 @@ spec:
                                         thing went wrong\"\r
 
                                         \
-                                        bookList.refetch()\r
+                                        \r
 
                                         \
-                                        tabs.value=\"books\"\r\n"
+                                        tabs.value=\"books\"\r
+
+                                        \
+                                        bookList.refetch()\r\n"
                                     submitButtonText:
                                       $$jsExpression: |
                                         bookId.value ? "Edit" : " Add "

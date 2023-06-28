@@ -31,4 +31,5 @@ spec:
         url: https://fake-json-server-4yn5.onrender.com/books
         headers: []
         method: GET
+        searchParams: []
   display: shell
