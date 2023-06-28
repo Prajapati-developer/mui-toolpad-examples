@@ -140,22 +140,20 @@ spec:
                                   props:
                                     formControlsAlign: end
                                     onSubmit:
-                                      $$jsExpressionAction: "await bookId.value? editBookById.fetch()
-                                        :  addBook.fetch();\r
+                                      $$jsExpressionAction: " bookId.value? await editBookById.fetch() :   await
+                                        addBook.fetch();\r
 
                                         \
-                                        editBookById.data?
-                                        tabs.value=\"books\":error.value=\"Some\
-                                        thing went wrong\"\r
-
-                                        \
-                                        \r
+                                        bookList.refetch()\r
 
                                         \
                                         tabs.value=\"books\"\r
 
                                         \
-                                        bookList.refetch()\r\n"
+                                        \r
+
+                                        \
+                                        \r\n"
                                     submitButtonText:
                                       $$jsExpression: |
                                         bookId.value ? "Edit" : " Add "
