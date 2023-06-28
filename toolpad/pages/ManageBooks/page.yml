@@ -589,7 +589,7 @@ spec:
     - name: bookList
       query:
         kind: rest
-        url: http://localhost:3030/books
+        url: https://fake-json-server-4yn5.onrender.com/books
         searchParams: []
         headers: []
         method: GET
@@ -597,7 +597,7 @@ spec:
       mode: mutation
       query:
         kind: rest
-        url: http://localhost:3030/books
+        url: https://fake-json-server-4yn5.onrender.com/books
         searchParams: []
         headers: []
         body:
@@ -656,7 +656,7 @@ spec:
         kind: rest
         url:
           $$jsExpression: |
-            `http://localhost:3030/books/${parameters.id}`
+            `https://fake-json-server-4yn5.onrender.com/books/${parameters.id}`
         searchParams: []
         headers: []
         method: DELETE
@@ -671,7 +671,7 @@ spec:
         kind: rest
         url:
           $$jsExpression: |
-            `http://localhost:3030/books/${parameters.id}`
+            `https://fake-json-server-4yn5.onrender.com/books/${parameters.id}`
         searchParams: []
         headers: []
         body:
