@@ -67,7 +67,7 @@ spec:
             content: Go and Search
             onClick:
               $$navigationAction:
-                page: fN4Tw_n
+                page: kfLTB1F
                 parameters: {}
           layout:
             horizontalAlign: end
@@ -146,7 +146,13 @@ spec:
                                         \
                                         editBookById.data?
                                         tabs.value=\"books\":error.value=\"Some\
-                                        thing went wrong\""
+                                        thing went wrong\"\r
+
+                                        \
+                                        bookList.refetch()\r
+
+                                        \
+                                        tabs.value=\"books\"\r\n"
                                     submitButtonText:
                                       $$jsExpression: |
                                         bookId.value ? "Edit" : " Add "
@@ -252,6 +258,10 @@ spec:
                                                           - Belgium
                                                           - UK
                                                           - India
+                                                          - Nigeria
+                                                          - Denmark
+                                                          - Italy
+
                                                         defaultValue:
                                                           $$jsExpression: >
                                                             pageTitle.value.includes("Edit")
@@ -265,13 +275,17 @@ spec:
                                                           - Hindi
                                                           - English
                                                           - Gujarati
+                                                          - Danish
+                                                          - Italian
+                                                          - Akkadian
+                                                          - Hebrew
+                                                          - Arabic
                                                         label: Language
                                                         fullWidth: true
                                                         isRequired: true
                                                         defaultValue:
                                                           $$jsExpression: >
-                                                            pageTitle.value.includes("Edit")
-                                                            ?
+                                                            bookId.value ?
                                                             dataGrid.selection.language
                                                             : ""
                                                     - component: TextField
@@ -536,13 +550,15 @@ spec:
                                       - field: title
                                         type: string
                                         headerName: Title
-                                        width: 145
+                                        width: 192
                                       - field: author
                                         type: string
                                         headerName: Author
+                                        width: 135.00000762939453
                                       - field: country
                                         type: string
                                         headerName: Country
+                                        width: 152.00000762939453
                                       - field: imageLink
                                         type: image
                                         headerName: Book Cover
@@ -567,8 +583,8 @@ spec:
                                       $$jsExpression: >
                                         tabs.value == "books" ? { display:
                                         "block" } : { display: "none" }
-                                    density: standard
-                                    height: 426
+                                    density: comfortable
+                                    height: 1299.9749755859375
   queries:
     - name: bookList
       query:
@@ -688,7 +704,7 @@ spec:
           value:
             $$jsExpression: |
               country.value
-        - name: langauge
+        - name: language
           value:
             $$jsExpression: |
               language.value
@@ -701,7 +717,9 @@ spec:
             $$jsExpression: |
               title.value
         - name: bookLink
-          value: null
+          value:
+            $$jsExpression: |
+              ebookLink.value
         - name: imageLink
           value:
             $$jsExpression: |

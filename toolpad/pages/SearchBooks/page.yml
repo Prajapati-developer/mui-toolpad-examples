@@ -31,4 +31,4 @@ spec:
         url: http://localhost:3030/books
         headers: []
         method: GET
-  display: standalone
+  display: shell

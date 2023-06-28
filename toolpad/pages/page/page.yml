@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: page
 spec:
-  id: about
+  id: e2Oa3db
   title: page
   display: shell
   queries:
